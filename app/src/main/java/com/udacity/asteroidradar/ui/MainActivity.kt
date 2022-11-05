@@ -15,6 +15,5 @@ class MainActivity : AppCompatActivity() {
         //
         //EXAMPLE
         //sdk.dir=C\:\\UserName\\android\\sdk
-        
-    }
+            }
 }
