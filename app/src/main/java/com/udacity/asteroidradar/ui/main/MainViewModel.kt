@@ -1,13 +1,51 @@
 package com.udacity.asteroidradar.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.udacity.asteroidradar.model.Asteroid
+import com.udacity.asteroidradar.model.AsteroidType
+import com.udacity.asteroidradar.model.PictureOfDay
 import com.udacity.asteroidradar.repo.AsteroidRepository
+import kotlinx.coroutines.launch
 
 class MainViewModel constructor(private val repository: AsteroidRepository) : ViewModel() {
+
+    private var type = MutableLiveData(AsteroidType.WEEK)
+
+    val asteroids: LiveData<List<Asteroid>> = Transformations.switchMap(type) { type ->
+        when (type) {
+            AsteroidType.TODAY -> repository.getAsteroids(AsteroidType.TODAY )
+            AsteroidType.WEEK -> repository.getAsteroids(AsteroidType.WEEK )
+            AsteroidType.SAVED -> repository.getAsteroids(AsteroidType.SAVED )
+        }
+    }
+
+    private val _pictureOfDay = MutableLiveData<PictureOfDay?>()
+    val pictureOfDay: LiveData<PictureOfDay?>
+        get() = _pictureOfDay
+
+
+    init {
+        refreshAsteroids()
+        getPictureOFDay()
+    }
+
+    fun setType(currType: AsteroidType) {
+        type.value = currType
+    }
+
+    private fun refreshAsteroids() {
+        viewModelScope.launch {
+            repository.refreshAsteroids()
+        }
+    }
+
+    private fun getPictureOFDay() {
+        viewModelScope.launch {
+            repository.getImageOfDay()?.let {
+                _pictureOfDay.value = it
+            }
+        }
+    }
 
     private val _navigateToAsteroidDetail = MutableLiveData<Asteroid?>()
     val navigateToAsteroidDetail: LiveData<Asteroid?>
