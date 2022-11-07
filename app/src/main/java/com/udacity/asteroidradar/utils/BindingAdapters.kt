@@ -12,12 +12,12 @@ import com.udacity.asteroidradar.model.PictureOfDay
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
-//        imageView.contentDescription =
-//            Resources.getSystem().getString(R.string.potentially_hazardous_asteroid_image)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
     } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
-//        imageView.contentDescription =
-//            Resources.getSystem().getString(R.string.not_hazardous_asteroid_image)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
     }
 }
 
@@ -25,12 +25,12 @@ fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
 fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.asteroid_hazardous)
-//        imageView.contentDescription =
-//            Resources.getSystem().getString(R.string.potentially_hazardous_asteroid_image)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
     } else {
         imageView.setImageResource(R.drawable.asteroid_safe)
-//        imageView.contentDescription =
-//            Resources.getSystem().getString(R.string.not_hazardous_asteroid_image)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
     }
 }
 
