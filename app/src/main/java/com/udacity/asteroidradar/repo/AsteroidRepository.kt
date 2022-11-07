@@ -23,8 +23,8 @@ class AsteroidRepository(private val asteroidDao: AsteroidDao) {
 
     fun getAsteroids(type: AsteroidType = AsteroidType.SAVED): LiveData<List<Asteroid>> = when(type) {
         AsteroidType.TODAY -> asteroidDao.getAsteroidsToday(formatter.format(Date()))
-        AsteroidType.WEEK -> asteroidDao.getAsteroidsWeek(formatter.format(Date()))
-        else -> asteroidDao.getAllAsteroids()
+        else -> asteroidDao.getAsteroidsWeek(formatter.format(Date()))
+        //else -> asteroidDao.getAllAsteroids()
     }
 
     suspend fun refreshAsteroids() {
