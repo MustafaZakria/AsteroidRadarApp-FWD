@@ -58,7 +58,9 @@ fun ImageView.loadPicOfDay(pictureOfDay: PictureOfDay?) {
         Picasso.get()
             .load(pictureOfDay.url)
             .error(R.mipmap.ic_launcher)
+            .placeholder(R.drawable.placeholder_picture_of_day)
             .into(this)
+
     }
 
 }
